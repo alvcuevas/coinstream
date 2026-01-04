@@ -78,7 +78,7 @@ export const useCoinGeckoWebSocket = ({
     ws.onopen = () => setIsWsReady(true)
     ws.onmessage = handleMessage
     ws.onclose = () => setIsWsReady(false)
-    ws.onerror = (error) => setIsWsReady(false)
+    ws.onerror = () => setIsWsReady(false)
 
     return () => ws.close()
   }, [])
