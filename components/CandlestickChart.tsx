@@ -48,7 +48,7 @@ const CandlestickChart = ({
         precision: "full",
       })
 
-      setOhlcData(newData ?? [])
+      startTransition(() => setOhlcData(newData ?? []))
     } catch (error) {
       console.error("Failed to fetch OHLCData", error)
     }
@@ -57,10 +57,8 @@ const CandlestickChart = ({
   const handlePeriodChange = (newPeriod: Period) => {
     if (newPeriod === period) return
 
-    startTransition(async () => {
-      setPeriod(newPeriod)
-      await fetchOHLCData(newPeriod)
-    })
+    setPeriod(newPeriod)
+    fetchOHLCData(newPeriod)
   }
 
   useEffect(() => {

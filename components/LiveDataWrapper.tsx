@@ -4,6 +4,7 @@ import CandlestickChart from "./CandlestickChart"
 import { Separator } from "./ui/separator"
 import { useCoinGeckoWebSocket } from "@/hooks/useCoinGeckoWebSocket"
 import DataTable from "./DataTable"
+import { useState } from "react"
 
 const LiveDataWrapper = ({
   children,
@@ -12,9 +13,11 @@ const LiveDataWrapper = ({
   coin,
   coinOHLCData,
 }: LiveDataProps) => {
+  const [liveInterval, setLiveInterval] = useState<"1s" | "1m">("1s")
   const { trades, ohlcv, price } = useCoinGeckoWebSocket({
     coinId,
     poolId,
+    liveInterval,
   })
 
   const tradeColumns: DataTableColumn<Trade>[] = [
@@ -57,7 +60,17 @@ const LiveDataWrapper = ({
       <Separator className="divider" />
 
       <div className="trend">
-        <CandlestickChart coinId={coinId} data={coinOHLCData} />
+        <CandlestickChart
+          coinId={coinId}
+          data={coinOHLCData}
+          liveOhlcv={ohlcv}
+          mode="live"
+          initialPeriod="daily"
+          liveInterval={liveInterval}
+          setLiveInterval={setLiveInterval}
+        >
+          <h4>Trend Overview</h4>
+        </CandlestickChart>
       </div>
 
       <Separator className="divider" />
