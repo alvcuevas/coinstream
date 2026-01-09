@@ -1,6 +1,14 @@
 import { clsx, type ClassValue } from "clsx"
 import { Time } from "lightweight-charts"
 import { twMerge } from "tailwind-merge"
+import { fetcher } from "./coingecko.actions"
+import {
+  CoinMarketData,
+  MarketCoin,
+  OHLCData,
+  SearchCoin,
+  TrendingCoin,
+} from "@/type"
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -119,4 +127,45 @@ export const buildPageNumbers = (
   pages.push(totalPages)
 
   return pages
+}
+
+export const getTrendingCoins = async () => {
+  try {
+    const data = await fetcher<{ coins: TrendingCoin[] }>(
+      "/search/trending",
+      undefined,
+      300
+    )
+    return data.coins
+  } catch (error) {
+    console.error("Error fetching trending coins", error)
+    return []
+  }
+}
+
+export const searchCoins = async (coin: string) => {
+  const searchData = await fetcher<{ coins: SearchCoin[] }>("/search", {
+    query: coin,
+  })
+
+  const coinData = searchData.coins.slice(0, 10)
+  const coinIds = coinData.map((coin) => coin.id).join(",")
+
+  const coinsMarketData = await fetcher<CoinMarketData[]>("/coins/markets", {
+    ids: coinIds,
+    vs_currency: "usd",
+  })
+
+  return coinsMarketData.map(
+    (coin) =>
+      ({
+        id: coin.id,
+        name: coin.name,
+        symbol: coin.symbol,
+        thumb: coin.image,
+        data: {
+          price_change_percentage_24h: coin.price_change_percentage_24h,
+        },
+      } as MarketCoin)
+  )
 }

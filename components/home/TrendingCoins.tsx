@@ -1,22 +1,17 @@
 import Image from "next/image"
 import Link from "next/link"
 import DataTable from "../DataTable"
-import { fetcher } from "@/lib/coingecko.actions"
 import { cn, formatPercentage } from "@/lib/utils"
 import { TrendingDown, TrendingUp } from "lucide-react"
 import { TrendingCoinsFallback } from "./fallback"
+import { DataTableColumn, TrendingCoin } from "@/type"
 
-const TrendingCoins = async () => {
-  let trendingCoins
+interface TrendingCoinsProps {
+  trendingCoins: TrendingCoin[]
+}
 
-  try {
-    trendingCoins = await fetcher<{ coins: TrendingCoin[] }>(
-      "/search/trending",
-      undefined,
-      300
-    )
-  } catch (error) {
-    console.error("Error fetching trending coins", error)
+const TrendingCoins = ({ trendingCoins }: TrendingCoinsProps) => {
+  if (!trendingCoins.length) {
     return <TrendingCoinsFallback />
   }
 
@@ -73,7 +68,7 @@ const TrendingCoins = async () => {
       <h4>Trending Coins</h4>
 
       <DataTable
-        data={trendingCoins.coins.slice(0, 6) || []}
+        data={trendingCoins.slice(0, 6)}
         columns={columns}
         rowKey={(coin) => coin.item.id}
         tableClassName="trending-coins-table"

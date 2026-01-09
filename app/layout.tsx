@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
 import "./globals.css"
-import Header from "@/components/Header"
+import Header from "@/components/home/Header"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,9 +14,9 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: "CoinPulse",
+  title: "CoinStream",
   description:
-    "Crypto Screener App with a built-in High-Frequency Terminal & Dashboard",
+    "Live crypto prices, deep market insights, and real-time data streams for every coin.",
 }
 
 export default function RootLayout({

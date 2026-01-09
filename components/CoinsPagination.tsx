@@ -11,11 +11,17 @@ import {
 import { buildPageNumbers, cn, ELLIPSIS } from "@/lib/utils"
 import { useRouter } from "next/navigation"
 
+interface CoinsPaginationProps {
+  currentPage: number
+  totalPages: number
+  hasMorePages: boolean
+}
+
 const CoinsPagination = ({
   currentPage,
   totalPages,
   hasMorePages,
-}: Pagination) => {
+}: CoinsPaginationProps) => {
   const router = useRouter()
 
   const handlePageChange = (page: number) => {

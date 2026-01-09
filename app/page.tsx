@@ -6,17 +6,23 @@ import {
   TrendingCoinsFallback,
 } from "@/components/home/fallback"
 import TrendingCoins from "@/components/home/TrendingCoins"
+import { SearchModal } from "@/components/home/SearchModal"
+import { getTrendingCoins } from "@/lib/utils"
 import { Suspense } from "react"
 
 const Page = async () => {
+  const trendingCoins = await getTrendingCoins()
+
   return (
     <main className="main-container">
+      <SearchModal trendingCoins={trendingCoins} />
+
       <section className="home-grid">
         <Suspense fallback={<CoinOverviewFallback />}>
           <CoinOverview />
         </Suspense>
         <Suspense fallback={<TrendingCoinsFallback />}>
-          <TrendingCoins />
+          <TrendingCoins trendingCoins={trendingCoins} />
         </Suspense>
       </section>
 

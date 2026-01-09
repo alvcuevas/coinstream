@@ -13,6 +13,12 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 
+interface ConverterProps {
+  symbol: string
+  icon: string
+  priceList: Record<string, number>
+}
+
 const Converter = ({ symbol, icon, priceList }: ConverterProps) => {
   const [currency, setCurrency] = useState("usd")
   const [amount, setAmount] = useState("10")

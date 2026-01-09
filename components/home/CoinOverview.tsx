@@ -3,6 +3,7 @@ import { formatCurrency } from "@/lib/utils"
 import Image from "next/image"
 import { CoinOverviewFallback } from "./fallback"
 import CandlestickChart from "../CandlestickChart"
+import { CoinDetailsData, OHLCData } from "@/type"
 
 const CoinOverview = async () => {
   let coin

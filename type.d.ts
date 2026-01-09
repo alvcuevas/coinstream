@@ -13,16 +13,9 @@ interface CandlestickChartProps {
   children?: React.ReactNode
   mode?: "historical" | "live"
   initialPeriod?: Period
-  liveInterval: "1s" | "1m"
-  setLiveInterval: (interval: "1s" | "1m") => void
+  liveInterval?: "1s" | "1m"
+  setLiveInterval?: (interval: "1s" | "1m") => void
 }
-
-interface ConverterProps {
-  symbol: string
-  icon: string
-  priceList: Record<string, number>
-}
-
 interface Ticker {
   market: {
     name: string
@@ -229,14 +222,6 @@ interface CoinDetailsData {
   tickers: Ticker[]
 }
 
-interface LiveDataProps {
-  coinId: string
-  poolId: string
-  coin: CoinDetailsData
-  coinOHLCData?: OHLCData[]
-  children?: React.ReactNode
-}
-
 interface LiveCoinHeaderProps {
   name: string
   image: string
@@ -293,19 +278,23 @@ type PaginationLinkProps = {
   size?: ButtonSize
 } & React.ComponentProps<"a">
 
-interface Pagination {
-  currentPage: number
-  totalPages: number
-  hasMorePages: boolean
-}
-
 interface HeaderProps {
   trendingCoins: TrendingCoin[]
 }
 
-type SearchItemCoin = SearchCoin | TrendingCoin["item"]
+interface MarketCoin {
+  id: string
+  name: string
+  symbol: string
+  thumb: string
+  data: {
+    price_change_percentage_24h: number
+  }
+}
 
-interface SearchItemProps {
+type SearchItemCoin = MarketCoin | TrendingCoin["item"]
+
+export interface SearchItemProps {
   coin: SearchItemCoin
   onSelect: (coinId: string) => void
   isActiveName: boolean

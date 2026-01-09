@@ -9,6 +9,7 @@ import {
 } from "@/constants"
 import { fetcher } from "@/lib/coingecko.actions"
 import { convertOHLCData } from "@/lib/utils"
+import { CandlestickChartProps, OHLCData, Period } from "@/type"
 import {
   CandlestickSeries,
   createChart,
@@ -102,7 +103,7 @@ const CandlestickChart = ({
       chartRef.current = null
       candleSeriesRef.current = null
     }
-  }, [height, period])
+  }, [height, period, ohlcData])
 
   useEffect(() => {
     if (!candleSeriesRef.current) return

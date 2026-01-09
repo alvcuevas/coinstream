@@ -1,14 +1,13 @@
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
-  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
 import { cn } from "@/lib/utils"
+import { DataTableProps } from "@/type"
 
 const DataTable = <T,>({
   columns,

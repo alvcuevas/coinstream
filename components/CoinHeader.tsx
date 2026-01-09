@@ -2,6 +2,7 @@ import { cn, formatCurrency, formatPercentage } from "@/lib/utils"
 import { TrendingDown, TrendingUp } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import Image from "next/image"
+import { LiveCoinHeaderProps } from "@/type"
 
 const CoinHeader = ({
   livePriceChangePercentage24h,

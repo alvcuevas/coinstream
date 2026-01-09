@@ -6,9 +6,17 @@ import { useCoinGeckoWebSocket } from "@/hooks/useCoinGeckoWebSocket"
 import DataTable from "./DataTable"
 import { useState } from "react"
 import CoinHeader from "./CoinHeader"
+import { CoinDetailsData, DataTableColumn, OHLCData, Trade } from "@/type"
+
+interface LiveDataProps {
+  coinId: string
+  poolId: string
+  coin: CoinDetailsData
+  coinOHLCData?: OHLCData[]
+  children?: React.ReactNode
+}
 
 const LiveDataWrapper = ({
-  children,
   coinId,
   poolId,
   coin,
