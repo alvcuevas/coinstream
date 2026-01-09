@@ -4,6 +4,7 @@ import Image from "next/image"
 import { cn, formatCurrency, formatPercentage } from "@/lib/utils"
 import DataTable from "@/components/DataTable"
 import CoinsPagination from "@/components/CoinsPagination"
+import { CoinMarketData, DataTableColumn, NextPageProps } from "@/type"
 
 const Coins = async ({ searchParams }: NextPageProps) => {
   const { page } = await searchParams

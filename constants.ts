@@ -4,6 +4,7 @@ import {
   ColorType,
   DeepPartial,
 } from "lightweight-charts"
+import { Period } from "./type"
 
 export const navItems = [
   {
