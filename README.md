@@ -4,6 +4,8 @@
 
 Experience live crypto prices, interactive candlestick charts, and real-time WebSocket updates for thousands of cryptocurrencies. Track market trends, analyze historical data, and convert between any crypto pairs—all in one sleek, responsive interface.
 
+<img width="968" height="2000" alt="coinstream1 netlify app_" src="https://github.com/user-attachments/assets/fb38a939-1e9f-450d-9b61-3b0f1f62c9ec" />
+
 ## ✨ Features
 
 - **Real-time Price Updates** — WebSocket integration for live market data
